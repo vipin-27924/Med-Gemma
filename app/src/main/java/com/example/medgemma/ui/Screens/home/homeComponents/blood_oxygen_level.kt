@@ -10,7 +10,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.medgemma.R
 
 @Composable
-fun SleepRateCard() {
+fun BloodOxygenCard() {
 
     Card(
         modifier = Modifier
@@ -31,7 +30,7 @@ fun SleepRateCard() {
         colors = CardDefaults.cardColors(Color.Gray)
     ) {
         Text(
-            text = "Sleep Rate",
+            text = "Blood Oxygen Level",
             color = Color.Black,
             fontFamily = FontFamily.Monospace,
             modifier = Modifier
@@ -43,14 +42,14 @@ fun SleepRateCard() {
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
             Image(
-                painter = painterResource(R.drawable.sleep_ratee),
+                painter = painterResource(R.drawable.bloodoxygen),
                 contentDescription = null,
                 modifier = Modifier
                     .size(100.dp)
             )
         }
         Text(
-            text = "80%",
+            text = "3450 Steps",
             color = Color.Black,
             fontFamily = FontFamily.Monospace,
             modifier = Modifier
@@ -60,8 +59,8 @@ fun SleepRateCard() {
     }
 }
 
-@Preview
 @Composable
-fun SleepRateCardPreview() {
-    SleepRateCard()
+@Preview
+fun BloodOxygenCardPreview() {
+    BloodOxygenCard()
 }

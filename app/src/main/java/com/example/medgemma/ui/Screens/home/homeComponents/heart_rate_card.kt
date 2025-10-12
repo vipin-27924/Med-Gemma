@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.medgemma.R
 
 @Composable
-fun SleepRateCard() {
+fun HeartRateCard() {
 
     Card(
         modifier = Modifier
@@ -31,7 +31,7 @@ fun SleepRateCard() {
         colors = CardDefaults.cardColors(Color.Gray)
     ) {
         Text(
-            text = "Sleep Rate",
+            text = "Heart Rate",
             color = Color.Black,
             fontFamily = FontFamily.Monospace,
             modifier = Modifier
@@ -43,14 +43,14 @@ fun SleepRateCard() {
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
             Image(
-                painter = painterResource(R.drawable.sleep_ratee),
+                painter = painterResource(R.drawable.heartrate),
                 contentDescription = null,
                 modifier = Modifier
                     .size(100.dp)
             )
         }
         Text(
-            text = "80%",
+            text = "77 BPM",
             color = Color.Black,
             fontFamily = FontFamily.Monospace,
             modifier = Modifier
@@ -60,8 +60,8 @@ fun SleepRateCard() {
     }
 }
 
-@Preview
 @Composable
-fun SleepRateCardPreview() {
-    SleepRateCard()
+@Preview
+fun HeartRateCardPreview() {
+    HeartRateCard()
 }

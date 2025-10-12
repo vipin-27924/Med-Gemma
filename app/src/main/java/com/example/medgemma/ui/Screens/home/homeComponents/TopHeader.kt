@@ -22,7 +22,7 @@ import com.example.medgemma.R
 fun TopHeader(){
     Row(
         modifier = Modifier
-            .padding(top = 15.dp , start = 15.dp , end = 15.dp, bottom = 15.dp)
+            .padding(top = 15.dp , start = 5.dp , end = 15.dp, bottom = 15.dp)
             .fillMaxWidth()
     ) {
         Text(

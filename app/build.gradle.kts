@@ -40,9 +40,11 @@ android {
 }
 
 dependencies {
-    implementation("com.airbnb.android:lottie-compose:6.6.10")
-    implementation("com.airbnb.android:lottie:6.6.10")
-    implementation("io.coil-kt.coil3:coil-compose:3.3.0")
+    dependencies {
+        // ... other dependencies
+        implementation("com.google.android.gms:play-services-fitness:21.3.0")
+        implementation("com.google.android.gms:play-services-auth:21.4.0")
+    }
     implementation("androidx.health.connect:connect-client:1.1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
