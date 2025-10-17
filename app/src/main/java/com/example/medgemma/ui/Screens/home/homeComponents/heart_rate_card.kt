@@ -1,67 +1,116 @@
 package com.example.medgemma.ui.Screens.home.homeComponents
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.painterResource // Keep the import, even if the resource is mocked below
 
-import com.example.medgemma.R
+// Theme Color (Consistent with BloodPressureCard.kt)
+private val MintGreen = Color(0xFF6DE8C3)
 
+/**
+ * Component for Heart Rate, styled consistently with the application theme.
+ */
 @Composable
-fun HeartRateCard() {
+fun HeartRateCard(heartRate: String,
+                  modifier: Modifier = Modifier) {
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .height(200.dp)
             .width(170.dp),
-        colors = CardDefaults.cardColors(Color.Gray)
+        // Applying rounded corners (16.dp for high rounding)
+        shape = RoundedCornerShape(16.dp),
+        // Using Mint Green as the theme color for the card background
+        colors = CardDefaults.cardColors(containerColor = MintGreen),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
-        Text(
-            text = "Heart Rate",
-            color = Color.Black,
-            fontFamily = FontFamily.Monospace,
+        Column(
             modifier = Modifier
-                .padding(10.dp)
-                .align(alignment = Alignment.CenterHorizontally)
-        )
-        Row(
-            modifier = Modifier
-                .align(alignment = Alignment.CenterHorizontally)
+                .fillMaxWidth()
+                .padding(16.dp), // Increased padding
+            horizontalAlignment = Alignment.CenterHorizontally,
+            // Use SpaceBetween to push the title to the top and value to the bottom
+            verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
-                painter = painterResource(R.drawable.heartrate),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(100.dp)
+            // Title
+            Text(
+                text = "Heart Rate",
+                color = Color.White, // White text for contrast on Mint Green
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp,
+                modifier = Modifier.fillMaxWidth()
             )
+
+            // Main Content Row (Icon and Rate)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f), // Allow this row to take up remaining vertical space
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Icon Placeholder (using an emoji for visual reference)
+                Text(
+                    text = "❤️", // Heart emoji for visual reference
+                    fontSize = 40.sp,
+                    modifier = Modifier.padding(end = 8.dp)
+                )
+
+                // Value and Unit
+                Column(horizontalAlignment = Alignment.Start) {
+                    // Heart Rate Value
+                    Text(
+                        text = heartRate,
+                        color = Color.White,
+                        fontWeight = FontWeight.ExtraBold, // Very bold for the key metric
+                        fontSize = 32.sp,
+                        // Remove padding here as it was applied to the column earlier
+                    )
+                    // Unit (BPM)
+                    Text(
+                        text = "BPM",
+                        color = Color.White.copy(alpha = 0.8f), // Slightly dimmed unit text
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 12.sp,
+                        modifier = Modifier.offset(y = (-4).dp) // Nudge up slightly
+                    )
+                }
+
+                // The original image reference (kept here but commented out, as R.drawable is external)
+                /*
+                Image(
+                    painter = painterResource(R.drawable.heartrate),
+                    contentDescription = "Heart Rate Icon",
+                    modifier = Modifier.size(80.dp)
+                )
+                */
+            }
         }
-        Text(
-            text = "77 BPM",
-            color = Color.Black,
-            fontFamily = FontFamily.Monospace,
-            modifier = Modifier
-                .padding(10.dp)
-                .align(alignment = Alignment.CenterHorizontally)
-        )
     }
 }
 
 @Composable
-@Preview
+@Preview(showBackground = true)
 fun HeartRateCardPreview() {
-    HeartRateCard()
+    HeartRateCard(heartRate = "77")
 }

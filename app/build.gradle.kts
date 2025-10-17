@@ -40,8 +40,13 @@ android {
 }
 
 dependencies {
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
     implementation("androidx.fragment:fragment-ktx:1.7.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation(libs.androidx.ui.graphics)
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
     implementation("com.google.android.gms:play-services-fitness:21.3.0")
     implementation("com.google.android.gms:play-services-auth:21.4.0")
