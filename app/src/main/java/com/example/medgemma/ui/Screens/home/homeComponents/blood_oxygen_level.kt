@@ -34,7 +34,7 @@ fun BloodOxygenCard(bloodOxygen: String,
     Card(
         modifier = modifier
             .height(200.dp)
-            .width(170.dp),
+           ,
         // Applying rounded corners (16.dp for high rounding)
         shape = RoundedCornerShape(16.dp),
         // Using Mint Green as the theme color for the card background

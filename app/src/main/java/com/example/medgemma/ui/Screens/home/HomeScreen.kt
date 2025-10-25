@@ -1,6 +1,7 @@
-
 package com.example.medgemma.ui.Screens.home
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.layout.*
@@ -33,16 +34,40 @@ fun HomeScreen(
     val context = LocalContext.current
 
     val availabilityStatus = HealthConnectClient.getSdkStatus(context)
-    if (availabilityStatus == HealthConnectClient.SDK_UNAVAILABLE) {
+
+    // This check now handles all cases where the service is not ready
+    if (availabilityStatus != HealthConnectClient.SDK_AVAILABLE) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Health Connect is not available on this device. Please install it from the Play Store.")
+            val message = if (availabilityStatus == HealthConnectClient.SDK_UNAVAILABLE) {
+                "Health Connect is not available on this device."
+            } else {
+                "Health Connect requires an update. Please update it from the Play Store."
+            }
+            Text(text = message, textAlign = TextAlign.Center)
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Button(onClick = {
+                val uri = Uri.parse("market://details?id=com.google.android.apps.healthdata&url=healthconnect%3A%2F%2Fonboarding")
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                try {
+                    context.startActivity(intent)
+                } catch (e: Exception) {
+                    Log.e("HomeScreen", "Could not open Play Store", e)
+                }
+            }) {
+                Text("Open Play Store")
+            }
         }
         return
     }
+
 
     val healthConnectClient = remember { HealthConnectClient.getOrCreate(context) }
     var hasPermissions by remember { mutableStateOf(false) }
